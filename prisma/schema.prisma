@@ -100,9 +100,10 @@ model RunStep {
   media        String?
   createdAt    DateTime @default(now())
 
-  run      Run      @relation(fields: [runId], references: [id], onDelete: Cascade)
-  step     Step     @relation(fields: [stepId], references: [id], onDelete: Cascade)
-  scenario Scenario @relation(fields: [scenarioId], references: [id], onDelete: Cascade)
+  run          Run            @relation(fields: [runId], references: [id], onDelete: Cascade)
+  step         Step           @relation(fields: [stepId], references: [id], onDelete: Cascade)
+  scenario     Scenario       @relation(fields: [scenarioId], references: [id], onDelete: Cascade)
+  RunStepMedia RunStepMedia[]
 
   @@unique([runId, stepId, scenarioId])
   @@map("run_steps")
@@ -151,6 +152,7 @@ model Step {
   media        String?
   ScenarioStep ScenarioStep[]
   RunStep      RunStep[]
+  StepMedia    StepMedia[]
 
   @@map("steps")
 }
@@ -207,6 +209,34 @@ enum Status {
   skipped
   untested
   undefined
+}
+
+model StepMedia {
+  id     String        @id @default(cuid())
+  stepId String
+  type   StepMediaType
+  src    String
+  step   Step          @relation(fields: [stepId], references: [id], onDelete: Cascade)
+
+  @@unique([stepId, type])
+  @@map("step_media")
+}
+
+model RunStepMedia {
+  id        String        @id @default(cuid())
+  runStepId String
+  type      StepMediaType
+  src       String
+  runStep   RunStep       @relation(fields: [runStepId], references: [id], onDelete: Cascade)
+
+  @@unique([runStepId, type])
+  @@map("run_step_media")
+}
+
+enum StepMediaType {
+  desktop
+  tablet
+  mobile
 }
 
 model MapNode {
