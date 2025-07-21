@@ -97,6 +97,7 @@ model RunStep {
   duration     Int?
   errorMessage String?
   stackTrace   String?
+  media        String?
   createdAt    DateTime @default(now())
 
   run      Run      @relation(fields: [runId], references: [id], onDelete: Cascade)
@@ -147,7 +148,7 @@ model Step {
   name         String
   contentHash  String?        @map("contenthash")
   active       Boolean        @default(true)
-  media        Json?
+  media        String?
   ScenarioStep ScenarioStep[]
   RunStep      RunStep[]
 
