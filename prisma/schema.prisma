@@ -213,22 +213,22 @@ enum Status {
 }
 
 model StepMedia {
-  id     String        @id @default(cuid())
+  id     String     @id @default(cuid())
   stepId String
   type   DeviceType
   src    String
-  step   Step          @relation(fields: [stepId], references: [id], onDelete: Cascade)
+  step   Step       @relation(fields: [stepId], references: [id], onDelete: Cascade)
 
   @@unique([stepId, type])
   @@map("step_media")
 }
 
 model RunStepMedia {
-  id        String        @id @default(cuid())
+  id        String     @id @default(cuid())
   runStepId String
   type      DeviceType
   src       String
-  runStep   RunStep       @relation(fields: [runStepId], references: [id], onDelete: Cascade)
+  runStep   RunStep    @relation(fields: [runStepId], references: [id], onDelete: Cascade)
 
   @@unique([runStepId, type])
   @@map("run_step_media")
