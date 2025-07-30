@@ -4,11 +4,12 @@ datasource db {
 }
 
 model Run {
-  id             String @id @default(cuid())
-  runNumber      Int    @unique @default(autoincrement())
+  id             String     @id @default(cuid())
+  runNumber      Int        @unique @default(autoincrement())
   status         Status
   browser        String
   platform       String
+  deviceType     DeviceType
   environment    String
   featuresCount  Int
   scenariosCount Int
@@ -214,7 +215,7 @@ enum Status {
 model StepMedia {
   id     String        @id @default(cuid())
   stepId String
-  type   StepMediaType
+  type   DeviceType
   src    String
   step   Step          @relation(fields: [stepId], references: [id], onDelete: Cascade)
 
@@ -225,7 +226,7 @@ model StepMedia {
 model RunStepMedia {
   id        String        @id @default(cuid())
   runStepId String
-  type      StepMediaType
+  type      DeviceType
   src       String
   runStep   RunStep       @relation(fields: [runStepId], references: [id], onDelete: Cascade)
 
@@ -233,7 +234,7 @@ model RunStepMedia {
   @@map("run_step_media")
 }
 
-enum StepMediaType {
+enum DeviceType {
   desktop
   tablet
   mobile
