@@ -290,3 +290,34 @@ model MapNodeDependency {
   @@unique([sourceNodeId, targetNodeId])
   @@map("map_node_dependencies")
 }
+
+model UserActivity {
+  id         String       @id @default(cuid())
+  userId     String
+  runId      String
+  scenarioId String?
+  stepId     String?
+  type       ActivityType
+  startedAt  DateTime
+  endedAt    DateTime
+  metadata   Json? // например { ticketUrl: "...", reason: "creating bug" }
+
+  @@index([userId])
+  @@index([runId])
+  @@index([scenarioId])
+  @@index([stepId])
+  @@map("user_activity")
+}
+
+enum ActivityType {
+  ACTIVE_WORK // обычная активность: мышь, клавиатура, скролл
+  BUG_REPORT // создание/оформление баг-тикета
+  TEST_DOC_WRITING // написание тест-кейсов, документации
+  AUTOTEST_WRITING // написание автотестов (код)
+  MEETING // участие в созвонах
+  IDLE // простои: нет активности более X секунд
+  REVIEW // просмотр чужих багов, тестов, документации
+  TEST_ENV_SETUP // подготовка окружения, перезапуск тестируемого сервера
+  EXPLORATORY_RESEARCH // изучение продукта, анализ бизнес-логики
+  PAUSE_MANUAL // пользователь явно нажал “Пауза” (в будущем, опционально)
+}
