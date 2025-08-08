@@ -79,9 +79,10 @@ model RunScenario {
   runId      String
   scenarioId String
   status     Status
-  duration   Int?
+  duration   Int?      @default(0)
   startedAt  DateTime?
   pausedAt   DateTime?
+  endedAt    DateTime?
   createdAt  DateTime  @default(now())
 
   run      Run      @relation(fields: [runId], references: [id], onDelete: Cascade)
