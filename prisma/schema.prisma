@@ -75,12 +75,14 @@ model RunFeature {
 }
 
 model RunScenario {
-  id         String   @id @default(cuid())
+  id         String    @id @default(cuid())
   runId      String
   scenarioId String
   status     Status
   duration   Int?
-  createdAt  DateTime @default(now())
+  startedAt  DateTime?
+  pausedAt   DateTime?
+  createdAt  DateTime  @default(now())
 
   run      Run      @relation(fields: [runId], references: [id], onDelete: Cascade)
   scenario Scenario @relation(fields: [scenarioId], references: [id], onDelete: Cascade)
