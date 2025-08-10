@@ -143,6 +143,7 @@ model Scenario {
   RunScenario RunScenario[]
   RunStep     RunStep[]
 
+  @@unique([featureId, contentHash])
   @@index([featureId])
   @@map("scenarios")
 }
@@ -158,6 +159,7 @@ model Step {
   RunStep      RunStep[]
   StepMedia    StepMedia[]
 
+  @@unique([keyword, name, contentHash])
   @@map("steps")
 }
 
