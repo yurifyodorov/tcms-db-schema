@@ -298,6 +298,7 @@ model MapNodeDependency {
 
 model UserActivity {
   id         String       @id @default(cuid())
+  projectId  String
   userId     String
   runId      String
   scenarioId String?
