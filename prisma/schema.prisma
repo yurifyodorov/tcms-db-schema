@@ -316,7 +316,7 @@ model UserActivity {
 }
 
 enum ActivityType {
-  ACTIVE_WORK // обычная активность: мышь, клавиатура, скролл
+  MANUAL_TESTING // обычная активность: выполнение тест ранов
   BUG_REPORT // создание/оформление баг-тикета
   TEST_DOC_WRITING // написание тест-кейсов, документации
   AUTOTEST_WRITING // написание автотестов (код)
