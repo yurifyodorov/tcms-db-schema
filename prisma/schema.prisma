@@ -47,6 +47,8 @@ model Run {
   duration  Int?
   auto      Boolean
 
+  archived Boolean @default(false)
+
   RunFeature  RunFeature[]
   RunScenario RunScenario[]
   RunStep     RunStep[]
