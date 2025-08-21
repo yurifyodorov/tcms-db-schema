@@ -10,7 +10,7 @@ model Run {
   browser        String
   platform       String
   deviceType     DeviceType
-  environment    String
+  environment    Json
   featuresCount  Int
   scenariosCount Int
   stepsCount     Int
