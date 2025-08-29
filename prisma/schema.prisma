@@ -124,6 +124,8 @@ model FeatureFile {
   createdAt     DateTime @default(now())
 
   features Feature[]
+
+  @@map("feature_files")
 }
 
 model Feature {
