@@ -115,6 +115,17 @@ model RunStep {
   @@map("run_steps")
 }
 
+model FeatureFile {
+  id            String   @id @default(cuid())
+  path          String   @unique
+  contentHash   String
+  lastCommitSha String?
+  updatedAt     DateTime @updatedAt
+  createdAt     DateTime @default(now())
+
+  features Feature[]
+}
+
 model Feature {
   id                 String              @id @default(cuid())
   keyword            String
@@ -126,6 +137,8 @@ model Feature {
   featureTags        FeatureTag[]
   RunFeature         RunFeature[]
   MapNodeFeatureData MapNodeFeatureData?
+  FeatureFile        FeatureFile?        @relation(fields: [featureFileId], references: [id])
+  featureFileId      String?
 
   @@map("features")
 }
