@@ -116,12 +116,13 @@ model RunStep {
 }
 
 model FeatureFile {
-  id            String   @id @default(cuid())
-  path          String   @unique
-  contentHash   String
-  lastCommitSha String?
-  updatedAt     DateTime @updatedAt
-  createdAt     DateTime @default(now())
+  id             String   @id @default(cuid())
+  path           String   @unique
+  contentHash    String
+  lastCommitSha  String?
+  lastModifiedBy Json?
+  updatedAt      DateTime @updatedAt
+  createdAt      DateTime @default(now())
 
   features Feature[]
 
