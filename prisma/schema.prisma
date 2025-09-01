@@ -117,14 +117,14 @@ model RunStep {
 
 model FeatureFile {
   id             String   @id @default(cuid())
+  featureId      String   @unique
   path           String   @unique
   contentHash    String
   lastCommitSha  String?
   lastModifiedBy Json?
   updatedAt      DateTime @updatedAt
   createdAt      DateTime @default(now())
-
-  features Feature[]
+  feature        Feature  @relation(fields: [featureId], references: [id])
 
   @@map("feature_files")
 }
@@ -140,8 +140,7 @@ model Feature {
   featureTags        FeatureTag[]
   RunFeature         RunFeature[]
   MapNodeFeatureData MapNodeFeatureData?
-  FeatureFile        FeatureFile?        @relation(fields: [featureFileId], references: [id])
-  featureFileId      String?
+  FeatureFile        FeatureFile?
 
   @@map("features")
 }
