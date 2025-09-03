@@ -121,6 +121,7 @@ model FeatureFile {
   path           String   @unique
   contentHash    String
   lastCommitSha  String?
+  commitMessage  String?
   lastModifiedBy Json?
   updatedAt      DateTime @updatedAt
   createdAt      DateTime @default(now())
