@@ -177,7 +177,7 @@ model Step {
   RunStep      RunStep[]
   StepMedia    StepMedia[]
 
-  @@unique([keyword, name, contentHash])
+  @@unique([keyword, name])
   @@map("steps")
 }
 
