@@ -119,7 +119,7 @@ model FeatureFile {
   id             String   @id @default(cuid())
   featureId      String   @unique
   path           String   @unique
-  contentHash    String
+  contentHash    String?
   lastCommitSha  String?
   commitMessage  String?
   lastModifiedBy Json?
