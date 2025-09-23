@@ -136,7 +136,7 @@ model Feature {
   name               String
   description        String?
   active             Boolean             @default(true)
-  contentHash        String?             @map("contenthash")
+  contentHash        String?             @map("contentHash")
   position           Int
   featureTags        FeatureTag[]
   RunFeature         RunFeature[]
@@ -153,7 +153,7 @@ model Scenario {
   name         String
   description  String?
   active       Boolean       @default(true)
-  contentHash  String?       @map("contenthash")
+  contentHash  String?       @map("contentHash")
   position     Int
   scenarioTags ScenarioTag[]
 
@@ -170,7 +170,7 @@ model Step {
   id           String         @id @default(cuid())
   keyword      String
   name         String
-  contentHash  String?        @map("contenthash")
+  contentHash  String?        @map("contentHash")
   active       Boolean        @default(true)
   media        String?
   ScenarioStep ScenarioStep[]
