@@ -46,8 +46,10 @@ model Run {
   updatedAt DateTime @updatedAt
   duration  Int?
   auto      Boolean
+  archived  Boolean  @default(false)
 
-  archived Boolean @default(false)
+  assigneeId String? @db.VarChar(255)
+  assignee   Json?
 
   RunFeature  RunFeature[]
   RunScenario RunScenario[]
@@ -58,6 +60,7 @@ model Run {
   @@index([auto])
   @@index([createdAt])
   @@index([status, createdAt])
+  @@index([assigneeId])
   @@map("runs")
 }
 
