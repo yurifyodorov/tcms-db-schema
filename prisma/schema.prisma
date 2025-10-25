@@ -3,6 +3,24 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model TestPlan {
+  id          String   @id @default(cuid())
+  name        String
+  description String?
+  version     String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  authorId String? @db.VarChar(255)
+  author   Json?
+  tags     Json?
+
+  runs Run[]
+
+  @@index([name])
+  @@map("test_plans")
+}
+
 model Run {
   id             String     @id @default(cuid())
   runNumber      Int        @unique @default(autoincrement())
@@ -51,6 +69,9 @@ model Run {
   assigneeId String? @db.VarChar(255)
   assignee   Json?
 
+  testPlanId String?   @db.VarChar(255)
+  testPlan   TestPlan? @relation(fields: [testPlanId], references: [id], onDelete: SetNull)
+
   RunFeature  RunFeature[]
   RunScenario RunScenario[]
   RunStep     RunStep[]
@@ -61,6 +82,7 @@ model Run {
   @@index([createdAt])
   @@index([status, createdAt])
   @@index([assigneeId])
+  @@index([testPlanId])
   @@map("runs")
 }
 
